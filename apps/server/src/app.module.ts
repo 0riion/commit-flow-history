@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import environment from '../config/env.config';
+import { TrpcModule } from './trpc/trpc.module';
+import { TrpcService } from './trpc/trpc.service';
+import { TrpcRouter } from './trpc/trpc.router';
 
 @Module({
   imports: [
@@ -11,8 +14,10 @@ import environment from '../config/env.config';
         load: [environment],
         isGlobal: true,
       }
-    )],
+    ),
+    TrpcModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TrpcService, TrpcRouter],
 })
 export class AppModule { }

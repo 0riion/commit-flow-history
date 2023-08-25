@@ -1,0 +1,20 @@
+@tailwind base;
+html {
+	scroll-behavior: smooth;
+}
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	* {
+		text-transform: capitalize;
+	}
+	.light body {
+		background: #fff !important;
+		color: #000;
+	}
+
+	.text-black {
+		color: rgba(0, 0, 0, 0.6);
+	}
+}

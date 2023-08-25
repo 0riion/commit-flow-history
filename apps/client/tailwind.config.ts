@@ -26,7 +26,7 @@ const config: Config = {
       transparent: "transparent",
       current: "currentColor",
       white: "#ffffff",
-      accent: "#8358FF",
+      accent: "#238636",
       "accent-dark": "#7444FF",
       "accent-light": "#9E7CFF",
       "accent-lighter": "#B9A0FF",

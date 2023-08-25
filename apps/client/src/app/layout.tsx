@@ -1,7 +1,9 @@
 'use client';
+import '../styles/globals.css'
 import { ThemeProvider } from "next-themes";
 import { Inter } from 'next/font/google'
 import { ReduxProvider } from '../redux/provider'
+import PageLayout from "../layouts/page";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +19,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <ThemeProvider enableSystem={true} attribute="class">
-            {children}
+            <PageLayout>
+              {children}
+            </PageLayout>
           </ThemeProvider>
         </ReduxProvider>
       </body>

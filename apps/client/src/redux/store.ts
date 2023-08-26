@@ -1,9 +1,13 @@
 
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import commitsReducer from "./features/commits";
+import { getEnv } from "../config";
 
 export const store = configureStore({
-    reducer: {},
-    devTools: process.env.NODE_ENV !== "production", // TODO: get from env settings
+    reducer: {
+        commits: commitsReducer,
+    },
+    devTools: getEnv().NEXT_PUBLIC_ENVIRONMENT === 'dev',
 });
 
 export type RootState = ReturnType<typeof store.getState>;

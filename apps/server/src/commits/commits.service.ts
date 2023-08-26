@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { TrpcService } from 'src/trpc/trpc.service';
-import { data } from './data';
-import axiosInstance from 'libs/axiosInstance';
+import { TrpcService } from '../trpc/trpc.service';
+import axiosInstance from '../../libs/axiosInstance';
 
 @Injectable()
 export class CommitsService extends TrpcService {
-    commits = data;
 
     async getCommits(
         repo: string,

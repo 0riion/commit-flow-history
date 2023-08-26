@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { commits } from "apps/client/src/assets/mockup-data/commits";
+import moment from 'moment';
+import { Commit } from 'apps/client/src/@types/commit.type';
 
-export default function Table() {
+interface TableProps {
+    commits: Commit[];
+}
+
+export default function Table({ commits }: TableProps) {
     return (
         <>
             {/* <!-- Table --> */}
@@ -38,7 +43,8 @@ export default function Table() {
                     </div>
 
                     {commits.map((data, index) => {
-                        const { url } = data.commit;
+                        const { commit, author } = data;
+                        const { url, verification, committer, message } = commit;
 
                         return (
                             <Link href={url} key={index} passHref legacyBehavior>
@@ -50,11 +56,11 @@ export default function Table() {
                                         className='dark:border-jacarta-600 border-jacarta-100 flex w-[20%] items-center border-t py-4 px-4'
                                         role='cell'
                                     >
-                                        <span className='mr-2 lg:mr-4'>{index}</span>
+                                        <span className='mr-2 lg:mr-4'>{index + 1}</span>
                                         <figure className='relative mr-2 w-8 shrink-0 self-start lg:mr-5 lg:w-12'>
                                             {/* <img src={image} alt={title} className="rounded-2lg" loading="lazy" /> */}
                                             <Image
-                                                src='/images/avatar/avatar_1.jpg'
+                                                src={author.avatar_url}
                                                 alt='avatar'
                                                 height={32}
                                                 width={32}
@@ -63,7 +69,7 @@ export default function Table() {
                                                 className='rounded-2lg'
                                             />
 
-                                            {true && (
+                                            {verification.verified && (
                                                 <div
                                                     className='dark:border-jacarta-600 bg-green absolute -right-2 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white'
                                                     data-tippy-content='Verified Collection'
@@ -82,7 +88,7 @@ export default function Table() {
                                             )}
                                         </figure>
                                         <span className='font-display text-jacarta-700 text-sm font-semibold dark:text-white'>
-                                            Julio Flores
+                                            {author.login}
                                         </span>
                                     </div>
 
@@ -91,7 +97,7 @@ export default function Table() {
                                         role='cell'
                                     >
                                         <span className='text-sm font-medium tracking-tight'>
-                                            Github
+                                            {committer.name}
                                         </span>
                                     </div>
 
@@ -100,8 +106,7 @@ export default function Table() {
                                         role='cell'
                                     >
                                         <span className={`text-green`}>
-                                            Merge pull request #4 from
-                                            0riion/development\n\nDevelopment
+                                            {message}
                                         </span>
                                     </div>
 
@@ -110,7 +115,7 @@ export default function Table() {
                                         role='cell'
                                     >
                                         <span className={`text-sm font-medium tracking-tight`}>
-                                            12/12/2021
+                                            {moment(committer.date).format('DD MMM YYYY')}
                                         </span>
                                     </div>
                                 </a>

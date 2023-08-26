@@ -1,5 +1,5 @@
-import PageLayout from '../layouts/page';
 import '../styles/globals.css';
+import PageLayout from '../layouts/page';
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import { ReduxProvider } from '../redux/provider';

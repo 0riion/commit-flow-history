@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { useCommonPagination } from "./useCommonPagination";
-import { getCommitTotalCount, getPaginatedCommits } from "../services/commit";
+import { TSort, useCommonPagination } from "./useCommonPagination";
+import { getCommitTotalCount, getPaginatedCommitsOrderBy } from "../services/commit";
 import { setCommits } from "../redux/features/commits";
 
 type TUsePaginatedCommits = () => {
     commits: any[];
     loading: boolean;
+    pageSize: number;
+    orderBy: TSort;
     nextPage: () => void;
     prevPage: () => void;
     changePageSize: (size: number) => void;
-    pageSize: number;
+    changeOrderBy: (orderBy: "asc" | "desc") => void;
 };
 
 export const usePaginatedCommits: TUsePaginatedCommits = () => {
@@ -18,6 +20,7 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
     const dispatch = useAppDispatch();
 
     const {
+        orderBy,
         loading,
         pageIndex,
         pageSize,
@@ -27,12 +30,13 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
         prevPage,
         changePageSize,
         changeTotalPages,
+        changeOrderBy,
     } = useCommonPagination();
 
     const getAllCommits = async () => {
         try {
             startLoading();
-            const data = await getPaginatedCommits(pageIndex, pageSize);
+            const data = await getPaginatedCommitsOrderBy(pageIndex, pageSize, orderBy);
             const total = await getCommitTotalCount();
             dispatch(setCommits(data));
             changeTotalPages(total);
@@ -44,14 +48,16 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
 
     useEffect(() => {
         getAllCommits();
-    }, [pageIndex, pageSize]);
+    }, [pageIndex, pageSize, orderBy]);
 
     return {
         commits,
         loading,
+        pageSize,
+        orderBy,
         nextPage,
         prevPage,
         changePageSize,
-        pageSize,
+        changeOrderBy,
     };
 };

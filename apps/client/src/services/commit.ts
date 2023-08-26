@@ -1,5 +1,6 @@
 import { Commit } from "../@types/commit.type";
 import { getEnv } from "../config";
+import { TSort } from "../hooks/useCommonPagination";
 import axiosInstance from "../utils/axiosInstance";
 
 const OWNER = getEnv().NEXT_PUBLIC_REPO_OWNER;
@@ -44,4 +45,26 @@ export const getCommitTotalCount: TGetCommitTotalCount = async () => {
         `/repos/${OWNER}/${REPO}/commits`
     );
     return response.data.length;
+};
+
+type TGetPaginatedCommitsOrderBy = (
+    pageIndex?: number,
+    pageSize?: number,
+    orderBy?: TSort
+) => Promise<Commit[]>;
+
+export const getPaginatedCommitsOrderBy: TGetPaginatedCommitsOrderBy = async (
+    pageIndex = 1,
+    pageSize = 5,
+    orderBy = "asc"
+) => {
+    const response = await axiosInstance.get(
+        `/repos/${OWNER}/${REPO}/commits?page=${pageIndex}&per_page=${pageSize}&order=${orderBy}`
+    );
+
+    if (orderBy === "asc") {
+        return response.data.reverse();
+    }
+
+    return response.data;
 };

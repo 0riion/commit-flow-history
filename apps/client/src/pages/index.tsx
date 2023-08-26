@@ -12,10 +12,12 @@ export default function Home() {
 	const {
 		loading,
 		commits,
+		orderBy,
+		pageSize,
 		nextPage,
 		prevPage,
 		changePageSize,
-		pageSize,
+		changeOrderBy,
 	} = usePaginatedCommits();
 
 	const branchData: BranchOption[] = [
@@ -40,7 +42,7 @@ export default function Home() {
 						<div className='flex flex-wrap items-center'>
 							<Branch data={branchData} />
 						</div>
-						<Sorter />
+						<Sorter changeOrderBy={changeOrderBy} orderBy={orderBy} />
 					</div>
 
 					{/* Table */}

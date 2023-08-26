@@ -1,17 +1,23 @@
 
 import { BranchOption } from '../@types/branch.type';
-import { Commit } from '../@types/commit.type';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
+import PageSize from '../components/home/page-size';
+import Pagination from '../components/home/pagination';
 import Sorter from '../components/home/sorter';
 import Table from '../components/home/table';
-import { getPaginatedCommits } from '../services/commit';
+import { usePaginatedCommits } from '../hooks/usePaginatedCommits';
 
-interface HomeProps {
-	commits: Commit[];
-}
+export default function Home() {
+	const {
+		loading,
+		commits,
+		nextPage,
+		prevPage,
+		changePageSize,
+		pageSize,
+	} = usePaginatedCommits();
 
-export default function Home({ commits }: HomeProps) {
 	const branchData: BranchOption[] = [
 		{ id: 1, branch: 'main' },
 		{ id: 2, branch: 'develop' },
@@ -37,21 +43,35 @@ export default function Home({ commits }: HomeProps) {
 						<Sorter />
 					</div>
 
-					<Table commits={commits} />
+					{/* Table */}
+
+					{loading && (
+						<div className='flex justify-center items-center'>
+							<div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900 dark:border-white'></div>
+						</div>
+					)}
+
+					{!loading && commits && commits.length > 0 && (
+						<Table commits={commits} />
+					)}
+
+					{!loading && commits && commits.length === 0 && (
+						<div className='flex justify-center items-center'>
+							<h1 className='text-2xl font-medium text-gray-900 dark:text-white'>
+								No commits found
+							</h1>
+						</div>
+					)}
+
+					{/* Pagination & Page size */}
+
+					<div className='flex flex-wrap items-center justify-between mt-10'>
+						<PageSize changePageSize={changePageSize} pageSize={pageSize} />
+						<Pagination prevPage={prevPage} nextPage={nextPage} />
+					</div>
 
 				</div>
 			</section>
 		</main>
 	);
-}
-
-export const getStaticProps = async () => {
-
-	const commits = await getPaginatedCommits(1, 5);
-
-	return {
-		props: {
-			commits,
-		},
-	};
 }

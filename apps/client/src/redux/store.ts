@@ -1,8 +1,11 @@
 
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import commitsReducer from "./features/commits";
 
 export const store = configureStore({
-    reducer: {},
+    reducer: {
+        commits: commitsReducer,
+    },
     devTools: process.env.NODE_ENV !== "production", // TODO: get from env settings
 });
 

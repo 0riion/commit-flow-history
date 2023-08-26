@@ -25,15 +25,23 @@ export const getCommit: TGetCommit = async (
     return response.data;
 }
 
-type TGetPaginatedCommits = (page: number, perPage: number) => Promise<Commit[]>;
+type TGetPaginatedCommits = (pageIndex: number, pageSize: number) => Promise<Commit[]>;
 
 export const getPaginatedCommits: TGetPaginatedCommits = async (
-    page = 1,
-    perPage = 10
+    pageIndex = 1,
+    pageSize = 5
 ) => {
     const response = await axiosInstance.get(
-        `/repos/${OWNER}/${REPO}/commits?page=${page}&per_page=${perPage}`
+        `/repos/${OWNER}/${REPO}/commits?page=${pageIndex}&per_page=${pageSize}`
     );
     return response.data;
 };
 
+type TGetCommitTotalCount = () => Promise<number>;
+
+export const getCommitTotalCount: TGetCommitTotalCount = async () => {
+    const response = await axiosInstance.get(
+        `/repos/${OWNER}/${REPO}/commits`
+    );
+    return response.data.length;
+};

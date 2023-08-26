@@ -56,7 +56,7 @@ export default function Table({ commits }: TableProps) {
                                         className='dark:border-jacarta-600 border-jacarta-100 flex w-[20%] items-center border-t py-4 px-4'
                                         role='cell'
                                     >
-                                        <span className='mr-2 lg:mr-4'>{index}</span>
+                                        <span className='mr-2 lg:mr-4'>{index + 1}</span>
                                         <figure className='relative mr-2 w-8 shrink-0 self-start lg:mr-5 lg:w-12'>
                                             {/* <img src={image} alt={title} className="rounded-2lg" loading="lazy" /> */}
                                             <Image

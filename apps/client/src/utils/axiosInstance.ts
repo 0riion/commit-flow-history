@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { getEnv } from '../config';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://api.github.com',
+    baseURL: getEnv().NEXT_PUBLIC_API_URL,
     headers: {
         'Content-Type': 'application/json',
         'X-GitHub-Api-Version': '2022-11-28',

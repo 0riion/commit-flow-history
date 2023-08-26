@@ -1,6 +1,7 @@
 import { BranchOption } from '../@types/branch.type';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
+import Sorter from '../components/home/sorter';
 
 export default async function Home() {
 	const branchData: BranchOption[] = [
@@ -24,9 +25,11 @@ export default async function Home() {
 
 					{/* Filters */}
 					<div className="mb-8 flex flex-wrap items-center justify-between">
-						<Branch data={branchData} />
+						<div className="flex flex-wrap items-center">
+							<Branch data={branchData} />
+						</div>
+						<Sorter />
 					</div>
-
 				</div>
 			</section>
 		</>

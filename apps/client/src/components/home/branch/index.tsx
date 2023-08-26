@@ -57,8 +57,8 @@ export default function Branch({ data }: Props) {
             <div
                 className={
                     branchShow
-                        ? 'dropdown-menu dark:bg-jacarta-800 z-10 min-w-[220px] whitespace-nowrap rounded-xl bg-white py-4 px-2 text-left shadow-xl show absolute top-full right-0'
-                        : 'dropdown-menu dark:bg-jacarta-800 z-10 min-w-[220px] whitespace-nowrap rounded-xl bg-white py-4 px-2 text-left shadow-xl absolute top-full right-0 hidden'
+                        ? 'dropdown-menu dark:bg-jacarta-800 z-10 min-w-[120px] whitespace-nowrap rounded-xl bg-white py-4 px-2 text-left shadow-xl show absolute top-full right-0'
+                        : 'dropdown-menu dark:bg-jacarta-800 z-10 min-w-[120px] whitespace-nowrap rounded-xl bg-white py-4 px-2 text-left shadow-xl absolute top-full right-0 hidden'
                 }>
                 <ul className="flex flex-col flex-wrap">
                     {

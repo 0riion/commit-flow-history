@@ -10,8 +10,11 @@ export default function ClientSide() {
 	useEffect(() => {
 		async function fetchCommits() {
 			const commits = await trpc.commits.query({
-				repo: 'facebook/react',
-				owner: 'date',
+				repo: 'commit-flow-history',
+				owner: '0riion',
+				per_page: 5,
+				page: 1,
+				order: 'desc',
 			});
 			setCommits(commits);
 		}

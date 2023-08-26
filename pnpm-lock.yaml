@@ -85,6 +85,9 @@ importers:
       '@trpc/server':
         specifier: ^10.38.0
         version: 10.38.0
+      axios:
+        specifier: ^1.4.0
+        version: 1.4.0
       reflect-metadata:
         specifier: ^0.1.13
         version: 0.1.13

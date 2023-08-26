@@ -6,6 +6,7 @@ import environment from '../config/env.config';
 import { TrpcModule } from './trpc/trpc.module';
 import { TrpcService } from './trpc/trpc.service';
 import { TrpcRouter } from './trpc/trpc.router';
+import { CommitsModule } from './commits/commits.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TrpcRouter } from './trpc/trpc.router';
       }
     ),
     TrpcModule,
+    CommitsModule,
   ],
   controllers: [AppController],
   providers: [AppService, TrpcService, TrpcRouter],

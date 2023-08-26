@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { getEnv } from '../config';
+import environment from '../config/env.config';
 
 const axiosInstance = axios.create({
-    baseURL: getEnv().NEXT_PUBLIC_API_URL,
+    baseURL: environment().github.baseUrl,
     headers: {
         'Content-Type': 'application/json',
         'X-GitHub-Api-Version': '2022-11-28',
-        'Authorization': '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'
+        'Authorization': environment().github.token,
     },
 });
 

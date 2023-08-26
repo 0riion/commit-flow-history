@@ -1,5 +1,4 @@
 import { getEnv } from "../config";
-import axiosInstance from "../utils/axiosInstance";
 import {
     TGetCommit,
     TGetCommitTotalCount,
@@ -7,42 +6,54 @@ import {
     TGetPaginatedCommits,
     TGetPaginatedCommitsOrderBy
 } from "../@types/services.type";
+import { trpc } from "../utils/trpc";
 
-const OWNER = getEnv().NEXT_PUBLIC_REPO_OWNER;
-const REPO = getEnv().NEXT_PUBLIC_REPO_NAME;
+const OWNER = getEnv().NEXT_PUBLIC_REPO_OWNER || '0riion';
+const REPO = getEnv().NEXT_PUBLIC_REPO_NAME || 'commit-flow-history';
 
 export const getCommits: TGetCommits = async () => {
-    const url = `/repos/${OWNER}/${REPO}/commits`;
-    const response = await axiosInstance.get(url);
-    return response.data;
+
+    const commits = await trpc.commits.query({
+        repo: REPO,
+        owner: OWNER,
+    });
+
+    return commits;
 }
 
-export const getCommit: TGetCommit = async (
-    repo = '0riion',
-    owner = 'commit-flow-history',
-    sha
-) => {
-    const response = await axiosInstance.get(
-        `/repos/${owner}/${repo}/git/commits/${sha}`
-    );
-    return response.data;
+export const getCommit: TGetCommit = async () => {
+
+    const commits = await trpc.commits.query({
+        repo: REPO,
+        owner: OWNER,
+    });
+
+    return commits;
 }
 
 export const getPaginatedCommits: TGetPaginatedCommits = async (
     pageIndex = 1,
     pageSize = 5
 ) => {
-    const response = await axiosInstance.get(
-        `/repos/${OWNER}/${REPO}/commits?page=${pageIndex}&per_page=${pageSize}`
-    );
-    return response.data;
+
+    const commits = await trpc.commits.query({
+        repo: REPO,
+        owner: OWNER,
+        pageIndex: pageIndex,
+        pageSize: pageSize,
+    });
+
+    return commits;
 };
 
 export const getCommitTotalCount: TGetCommitTotalCount = async () => {
-    const response = await axiosInstance.get(
-        `/repos/${OWNER}/${REPO}/commits`
-    );
-    return response.data.length;
+
+    const commits = await trpc.commits.query({
+        repo: REPO,
+        owner: OWNER,
+    });
+
+    return commits.length;
 };
 
 
@@ -52,13 +63,13 @@ export const getPaginatedCommitsOrderBy: TGetPaginatedCommitsOrderBy = async (
     pageSize = 5,
     orderBy = "asc"
 ) => {
-    const response = await axiosInstance.get(
-        `/repos/${OWNER}/${REPO}/commits?page=${pageIndex}&per_page=${pageSize}&order=${orderBy}`
-    );
+    const commits = await trpc.commits.query({
+        repo: REPO,
+        owner: OWNER,
+        pageIndex,
+        pageSize,
+        orderBy,
+    });
 
-    if (orderBy === "asc") {
-        return response.data.reverse();
-    }
-
-    return response.data;
+    return commits;
 };

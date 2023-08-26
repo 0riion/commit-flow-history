@@ -6,7 +6,6 @@ export type TGetCommits = () => Promise<Commit[]>;
 export type TGetCommit = (
     repo?: string,
     owner?: string,
-    sha?: string
 ) => Promise<Commit>;
 
 export type TGetPaginatedCommits = (

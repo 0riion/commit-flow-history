@@ -28,14 +28,14 @@ export class TrpcRouter {
             .input(z.object({
                 repo: z.string(),
                 owner: z.string(),
-                page: z.number().optional(),
-                per_page: z.number().optional(),
-                order: z.string().optional(),
+                pageIndex: z.number().optional(),
+                pageSize: z.number().optional(),
+                orderBy: z.string().optional(),
                 branch: z.string().optional(),
             }))
             .query(({ input }) => {
-                const { repo, owner, page, per_page, order } = input;
-                return this.commitsService.getCommits(repo, owner, page, per_page, order);
+                const { repo, owner, pageIndex, pageSize, orderBy } = input;
+                return this.commitsService.getCommits(repo, owner, pageIndex, pageSize, orderBy);
             }),
     });
 

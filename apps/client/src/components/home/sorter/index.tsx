@@ -12,7 +12,6 @@ const data: { id: TSort; text: TSort; }[] = [
 ];
 
 export default function Sorter({ changeOrderBy, orderBy }: ISorterProps) {
-    console.log(orderBy);
     return (
         <div className="dropdown relative my-1 cursor-pointer">
             <select

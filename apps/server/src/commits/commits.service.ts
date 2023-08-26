@@ -10,38 +10,33 @@ export class CommitsService extends TrpcService {
     async getCommits(
         repo: string,
         owner: string,
-        page?: number,
-        per_page?: number,
-        order?: string,
+        pageIndex?: number,
+        pageSize?: number,
+        orderBy?: string,
         branch?: string
     ): Promise<any> {
-        const url = `/repos/${owner}/${repo}/commits`
+        let url = `/repos/${owner}/${repo}/commits`
+        let result = null;
 
-        if (page && per_page) {
-            const response = await axiosInstance.get(url, {
-                params: {
-                    page,
-                    per_page
-                }
-            });
-            return response.data;
+        if (pageIndex && pageSize) {
+            url += `?page=${pageIndex}&per_page=${pageSize}`;
         }
-
-        if (order === 'desc') {
-            const response = await axiosInstance.get(url);
-            return response.data.reverse();
-        };
 
         if (branch) {
-            const response = await axiosInstance.get(url, {
-                params: {
-                    sha: branch
-                }
-            });
-            return response.data;
+            if (url.includes('?')) {
+                url += `&sha=${branch}`;
+            } else {
+                url += `?sha=${branch}`;
+            }
         }
 
-        const { data } = await axiosInstance.get(`/repos/${owner}/${repo}/commits`);
-        return data;
+        const response = await axiosInstance.get(url);
+        result = response.data;
+
+        if (orderBy === 'desc') {
+            result.reverse();
+        }
+
+        return result;
     }
 }

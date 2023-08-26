@@ -1,5 +1,6 @@
 
 import { BranchOption } from '../@types/branch.type';
+import LoadingComponent from '../components/common/loadingComponent';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
 import PageSize from '../components/home/page-size';
@@ -12,10 +13,12 @@ export default function Home() {
 	const {
 		loading,
 		commits,
+		orderBy,
+		pageSize,
 		nextPage,
 		prevPage,
 		changePageSize,
-		pageSize,
+		changeOrderBy,
 	} = usePaginatedCommits();
 
 	const branchData: BranchOption[] = [
@@ -40,15 +43,13 @@ export default function Home() {
 						<div className='flex flex-wrap items-center'>
 							<Branch data={branchData} />
 						</div>
-						<Sorter />
+						<Sorter changeOrderBy={changeOrderBy} orderBy={orderBy} />
 					</div>
 
 					{/* Table */}
 
 					{loading && (
-						<div className='flex justify-center items-center'>
-							<div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900 dark:border-white'></div>
-						</div>
+						<LoadingComponent />
 					)}
 
 					{!loading && commits && commits.length > 0 && (

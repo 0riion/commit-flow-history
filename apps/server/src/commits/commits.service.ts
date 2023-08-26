@@ -7,7 +7,14 @@ import axiosInstance from 'libs/axiosInstance';
 export class CommitsService extends TrpcService {
     commits = data;
 
-    async getCommits(repo: string, owner: string, page: number, per_page: number, order: string): Promise<any> {
+    async getCommits(
+        repo: string,
+        owner: string,
+        page?: number,
+        per_page?: number,
+        order?: string,
+        branch?: string
+    ): Promise<any> {
         const url = `/repos/${owner}/${repo}/commits`
 
         if (page && per_page) {
@@ -24,6 +31,15 @@ export class CommitsService extends TrpcService {
             const response = await axiosInstance.get(url);
             return response.data.reverse();
         };
+
+        if (branch) {
+            const response = await axiosInstance.get(url, {
+                params: {
+                    sha: branch
+                }
+            });
+            return response.data;
+        }
 
         const { data } = await axiosInstance.get(`/repos/${owner}/${repo}/commits`);
         return data;

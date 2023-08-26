@@ -28,9 +28,10 @@ export class TrpcRouter {
             .input(z.object({
                 repo: z.string(),
                 owner: z.string(),
-                page: z.number(),
-                per_page: z.number(),
-                order: z.string(),
+                page: z.number().optional(),
+                per_page: z.number().optional(),
+                order: z.string().optional(),
+                branch: z.string().optional(),
             }))
             .query(({ input }) => {
                 const { repo, owner, page, per_page, order } = input;

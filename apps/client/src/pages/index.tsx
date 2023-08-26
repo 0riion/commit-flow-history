@@ -1,6 +1,6 @@
 
 import { BranchOption } from '../@types/branch.type';
-import LoadingComponent from '../components/common/loadingComponent';
+import LoadingComponent from '../components/common/loading-component';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
 import PageSize from '../components/home/page-size';

@@ -2,10 +2,14 @@ import { INestApplication, Injectable } from '@nestjs/common';
 import { z } from 'zod';
 import { TrpcService } from './trpc.service';
 import * as trpcExpress from '@trpc/server/adapters/express';
+import { CommitsService } from 'src/commits/commits.service';
 
 @Injectable()
 export class TrpcRouter {
-    constructor(private readonly trpc: TrpcService) { }
+    constructor(
+        private readonly trpc: TrpcService,
+        private readonly commitsService: CommitsService,
+    ) { }
 
     appRouter = this.trpc.router({
         hello: this.trpc.procedure
@@ -19,6 +23,15 @@ export class TrpcRouter {
                 return {
                     greeting: `Hello ${name ? name : `World!`}`,
                 };
+            }),
+        commits: this.trpc.procedure
+            .input(z.object({
+                repo: z.string(),
+                owner: z.string(),
+            }))
+            .query(({ input }) => {
+                const { repo, owner } = input;
+                return this.commitsService.getCommits(repo, owner);
             }),
     });
 

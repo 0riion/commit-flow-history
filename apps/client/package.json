@@ -6,7 +6,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"test": "jest"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
@@ -16,8 +17,10 @@
 		"@types/react": "18.2.21",
 		"@types/react-dom": "18.2.7",
 		"autoprefixer": "10.4.15",
+		"axios": "^1.4.0",
 		"eslint": "^8.42.0",
 		"eslint-config-next": "13.4.19",
+		"moment": "^2.29.4",
 		"next": "13.4.19",
 		"next-themes": "^0.2.1",
 		"postcss": "8.4.28",

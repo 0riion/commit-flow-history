@@ -6,12 +6,12 @@ import { ReduxProvider } from '../redux/provider';
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<ReduxProvider>
+		// <ReduxProvider>
 			<ThemeProvider enableSystem={true} attribute='class'>
 				<PageLayout>
 					<Component {...pageProps} />
 				</PageLayout>
 			</ThemeProvider>
-		</ReduxProvider>
+		// </ReduxProvider>
 	);
 }

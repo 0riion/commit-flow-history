@@ -1,11 +1,17 @@
 
 import { BranchOption } from '../@types/branch.type';
+import { Commit } from '../@types/commit.type';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
 import Sorter from '../components/home/sorter';
 import Table from '../components/home/table';
+import { getPaginatedCommits } from '../services/commit';
 
-export default function Home() {
+interface HomeProps {
+	commits: Commit[];
+}
+
+export default function Home({ commits }: HomeProps) {
 	const branchData: BranchOption[] = [
 		{ id: 1, branch: 'main' },
 		{ id: 2, branch: 'develop' },
@@ -31,10 +37,21 @@ export default function Home() {
 						<Sorter />
 					</div>
 
-					<Table />
+					<Table commits={commits} />
 
 				</div>
 			</section>
 		</main>
 	);
+}
+
+export const getStaticProps = async () => {
+
+	const commits = await getPaginatedCommits(1, 5);
+
+	return {
+		props: {
+			commits,
+		},
+	};
 }

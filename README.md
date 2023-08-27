@@ -71,6 +71,9 @@ pnpm test
 
 The server and client are in the same repository, the server is in the `apps/server` folder and the client is in the `apps/client` folder. Thanks you can install, remove, and update the dependencies of the server and client independently.
 
+- `theme`: a simple theme created with Next Theme was used to manage the colors of the application, and refactor the styles of the application.
+- `dark-light mode`: the application has a dark and light mode, the mode is saved internally.
+
 ### Client Structure
 
 ![Client Image](./.media/client.png)

@@ -34,8 +34,17 @@ export class TrpcRouter {
                 branch: z.string().optional(),
             }))
             .query(({ input }) => {
-                const { repo, owner, pageIndex, pageSize, orderBy } = input;
-                return this.commitsService.getCommits(repo, owner, pageIndex, pageSize, orderBy);
+                const { repo, owner, pageIndex, pageSize, orderBy, branch } = input;
+                return this.commitsService.getCommits(repo, owner, pageIndex, pageSize, orderBy, branch);
+            }),
+        branches: this.trpc.procedure
+            .input(z.object({
+                repo: z.string(),
+                owner: z.string(),
+            }))
+            .query(({ input }) => {
+                const { repo, owner } = input;
+                return this.commitsService.getAllBranchs(repo, owner);
             }),
     });
 

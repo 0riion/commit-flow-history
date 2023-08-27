@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { TSort, useCommonPagination } from "./useCommonPagination";
 import { getCommitTotalCount, getPaginatedCommitsOrderBy } from "../services/commit";
@@ -9,13 +9,16 @@ type TUsePaginatedCommits = () => {
     loading: boolean;
     pageSize: number;
     orderBy: TSort;
+    currentBranch: string;
     nextPage: () => void;
     prevPage: () => void;
     changePageSize: (size: number) => void;
     changeOrderBy: (orderBy: "asc" | "desc") => void;
+    setCurrentBranch: (branch: string) => void;
 };
 
 export const usePaginatedCommits: TUsePaginatedCommits = () => {
+    const [currentBranch, setCurrentBranch] = useState<string>("main");
     const commits = useAppSelector((state) => state.commits.commits);
     const dispatch = useAppDispatch();
 
@@ -36,7 +39,12 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
     const getAllCommits = async () => {
         try {
             startLoading();
-            const data = await getPaginatedCommitsOrderBy(pageIndex, pageSize, orderBy);
+            const data = await getPaginatedCommitsOrderBy(
+                pageIndex,
+                pageSize,
+                orderBy,
+                currentBranch
+            );
             const total = await getCommitTotalCount();
             dispatch(setCommits(data));
             changeTotalPages(total);
@@ -48,16 +56,18 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
 
     useEffect(() => {
         getAllCommits();
-    }, [pageIndex, pageSize, orderBy]);
+    }, [pageIndex, pageSize, orderBy, currentBranch]);
 
     return {
         commits,
         loading,
         pageSize,
         orderBy,
+        currentBranch,
         nextPage,
         prevPage,
         changePageSize,
         changeOrderBy,
+        setCurrentBranch,
     };
 };

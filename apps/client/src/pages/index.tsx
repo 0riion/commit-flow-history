@@ -1,5 +1,3 @@
-
-import { BranchOption } from '../@types/branch.type';
 import LoadingComponent from '../components/common/loading-component';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
@@ -11,6 +9,7 @@ import { usePaginatedCommits } from '../hooks/usePaginatedCommits';
 
 export default function Home() {
 	const {
+		currentBranch,
 		loading,
 		commits,
 		orderBy,
@@ -19,14 +18,8 @@ export default function Home() {
 		prevPage,
 		changePageSize,
 		changeOrderBy,
+		setCurrentBranch,
 	} = usePaginatedCommits();
-
-	const branchData: BranchOption[] = [
-		{ id: 1, branch: 'main' },
-		{ id: 2, branch: 'develop' },
-		{ id: 3, branch: 'feature' },
-		{ id: 4, branch: 'release' },
-	];
 
 	return (
 		<main>
@@ -41,7 +34,7 @@ export default function Home() {
 					{/* Filters */}
 					<div className='mb-8 flex flex-wrap items-center justify-between'>
 						<div className='flex flex-wrap items-center'>
-							<Branch data={branchData} />
+							<Branch currentBranch={currentBranch} setCurrentBranch={setCurrentBranch} />
 						</div>
 						<Sorter changeOrderBy={changeOrderBy} orderBy={orderBy} />
 					</div>

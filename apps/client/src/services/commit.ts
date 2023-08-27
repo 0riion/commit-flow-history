@@ -7,6 +7,7 @@ import {
     TGetPaginatedCommitsOrderBy
 } from "../@types/services.type";
 import { trpc } from "../utils/trpc";
+import { Branch } from "../@types/branch.type";
 
 const OWNER = getEnv().NEXT_PUBLIC_REPO_OWNER || '0riion';
 const REPO = getEnv().NEXT_PUBLIC_REPO_NAME || 'commit-flow-history';
@@ -61,7 +62,8 @@ export const getCommitTotalCount: TGetCommitTotalCount = async () => {
 export const getPaginatedCommitsOrderBy: TGetPaginatedCommitsOrderBy = async (
     pageIndex = 1,
     pageSize = 5,
-    orderBy = "asc"
+    orderBy = "asc",
+    branch = "main"
 ) => {
     const commits = await trpc.commits.query({
         repo: REPO,
@@ -69,7 +71,19 @@ export const getPaginatedCommitsOrderBy: TGetPaginatedCommitsOrderBy = async (
         pageIndex,
         pageSize,
         orderBy,
+        branch,
     });
 
     return commits;
+};
+
+type TGetAllBranchs = () => Promise<Branch[]>;
+
+export const getAllBranchs: TGetAllBranchs = async () => {
+    const branches = await trpc.branches.query({
+        repo: REPO,
+        owner: OWNER,
+    });
+
+    return branches;
 };

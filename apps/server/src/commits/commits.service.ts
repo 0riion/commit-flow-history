@@ -37,4 +37,10 @@ export class CommitsService extends TrpcService {
 
         return result;
     }
+
+    async getAllBranchs(repo: string, owner: string): Promise<any> {
+        const url = `/repos/${owner}/${repo}/branches`;
+        const response = await axiosInstance.get(url);
+        return response.data;
+    }
 }

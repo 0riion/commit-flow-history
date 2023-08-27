@@ -18,5 +18,6 @@ export type TGetCommitTotalCount = () => Promise<number>;
 export type TGetPaginatedCommitsOrderBy = (
     pageIndex?: number,
     pageSize?: number,
-    orderBy?: TSort
+    orderBy?: TSort,
+    branch?: string
 ) => Promise<Commit[]>;

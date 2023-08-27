@@ -1,38 +1,90 @@
 # Commit Flow History
 
-Show the commit flow history of a git repository, in this case the repository is [commit-flow-history](https://github.com/0riion/commit-flow-history). This project is build with:
+This project lists all commits of a project. It provides the following functionalities:
 
-- [NextJS](https://nextjs.org/): React framework that makes it easy to build server-rendered and static websites.
-- [TailwindCSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.
-- [NestJS](https://nestjs.com/): A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
-- [Monorepo with pnpm workspace](https://pnpm.io/): Fast, disk space efficient package manager.
-- [tRPC](https://trpc.io/): End-to-end typesafe APIs made easy, this project use it to communicate between the frontend and the backend.
-- [TypeScript](https://www.typescriptlang.org/): TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+- List all commits and show in a table
+- Paginate all the commits of the project by the user, with 1, 5, 10, or 20 items per page.
+- Order the commits from a page for the newest and oldest commits.
+- Inspect a single commit's information.
+- Change branch and list all commits based on the branch.
 
-## Project Structure
+## Technologies
 
-The server and client are in the same repository, the server is in the `apps/server` folder and the client is in the `apps/client` folder. The `libs` folder contains the shared code between the server and the client.
+The technologies used in this project are:
 
-## How to run the project
+- Next.js
+- NestJS
+- Tailwind CSS
+- Monorepo with pnpm workspace
+- tRPC
+- TypeScript
+- Redux
+- Redux Toolkit
+- Next Theme
 
-### Install dependencies
+## Requirements
 
-Once you clone the repository, you need to install the dependencies with the following command:
+Both the server and the client need the following environment variables:
+
+- `server`:
+    - `PORT`: the port where the server will run.
+    - `GITHUB_TOKEN`: the GitHub token to access the GitHub API.
+
+- `client`:
+    - `NEXT_PUBLIC_ENVIRONMENT`: the environment where the application is running, it can be `development`, `staging`, or `production`.
+    - `NEXT_PUBLIC_API_URL`: the URL of the server API.
+    - `NEXT_PUBLIC_GITHUB_AUTH_TOKEN`: the GitHub token to access the GitHub API.
+    - `NEXT_PUBLIC_REPO_OWNER=0riion`: the owner of the repository.
+    - `NEXT_PUBLIC_REPO_NAME`: the name of the repository.
+
+You can define the necessary environment variables in each file, you can check the .env.example files to see the necessary environment variables.
+
+WARNING: the project has a github token, with limited permissions and time, to access the GitHub API, you can use it, but it is recommended to use your own token.
+
+## How to use the application
+
+- Clone the repository: clone the repository with the following command:
+
+```bash
+git clone <repository-url>
+```
+
+- Install dependencies: once you clone the repository, you need to install the dependencies with the following command:
 
 ```bash
 pnpm i
 ```
 
-### Run the server
-
-Once you run the following command, the server and the client will be running in different ports.
+- Run the application: once you install the dependencies, you can run the application with the following command:
 
 ```bash
 pnpm dev
 ```
 
-### Environment variables
+- Run tests: once you install the dependencies, you can run the tests with the following command:
 
-Each project has its own `.env` file, the server has the `.env` file in the root folder and the client has the `.env.local` file in the `apps/client` folder.
+```bash
+pnpm test
+```
 
-You can define the necessary environment variables in each file, you can check the .env.example files to see the necessary environment variables.
+## Project Structure
+
+The server and client are in the same repository, the server is in the `apps/server` folder and the client is in the `apps/client` folder. Thanks you can install, remove, and update the dependencies of the server and client independently.
+
+### Client Structure
+
+![Client Image](./.media/client.png)
+
+- `Router`: the router of the application, it is based on the Next.js router.
+- `Components`: the components of the application, this components are used in the pages.
+- `Hooks`: the hooks of the application.
+- `Redux`: manage the state of the application, the state it's simple, so it's not necessary to use Redux, but it was used to show some knowledge of Redux.
+- `Services`: The services are functions that are used to make requests to the server integrated with tRPC.
+- `Styles`: The styles contain the global styles of the application, part of the simple theem created.
+- `Utils`: the utils of the application.
+
+### Server Structure
+
+The server is a NestJS application, the structure default of a NestJS application was used. The only difference is that RTPC was integrated to make the requests to the GitHub API and safe the API.
+
+The api is not connected to a database, because it is not necessary for this exercise, instead of that it is integrated with the github api.

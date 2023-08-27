@@ -5,7 +5,6 @@ This project lists all commits of a project. It provides the following functiona
 - List all commits and show in a table
 - Paginate all the commits of the project by the user, with 1, 5, 10, or 20 items per page.
 - Order the commits from a page for the newest and oldest commits.
-- Inspect a single commit's information.
 - Change branch and list all commits based on the branch.
 
 ## Technologies

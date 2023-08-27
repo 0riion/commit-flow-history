@@ -54,7 +54,6 @@ export default function Home() {
 					)}
 
 					{/* Table */}
-
 					{loading && (
 						<LoadingComponent />
 					)}
@@ -72,7 +71,6 @@ export default function Home() {
 					)}
 
 					{/* Pagination & Page size */}
-
 					<div className='flex flex-wrap items-center justify-between mt-10'>
 						<PageSize changePageSize={changePageSize} pageSize={pageSize} />
 						<Pagination prevPage={prevPage} nextPage={nextPage} />

@@ -58,20 +58,17 @@ export default function Table({ commits }: TableProps) {
                                     >
                                         <span className='mr-2 lg:mr-4'>{index + 1}</span>
                                         <figure className='relative mr-2 w-8 shrink-0 self-start lg:mr-5 lg:w-12'>
-                                            {/* <img src={image} alt={title} className="rounded-2lg" loading="lazy" /> */}
                                             <Image
                                                 src={author.avatar_url}
                                                 alt='avatar'
-                                                height={32}
-                                                width={32}
-                                                layout='responsive'
-                                                objectFit='contain'
+                                                height={35}
+                                                width={35}
                                                 className='rounded-2lg'
                                             />
 
                                             {verification.verified && (
                                                 <div
-                                                    className='dark:border-jacarta-600 bg-green absolute -right-2 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white'
+                                                    className='dark:border-jacarta-600 bg-green absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white'
                                                     data-tippy-content='Verified Collection'
                                                 >
                                                     <svg

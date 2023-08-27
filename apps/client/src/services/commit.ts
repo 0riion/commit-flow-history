@@ -8,6 +8,7 @@ import {
 } from "../@types/services.type";
 import { trpc } from "../utils/trpc";
 import { Branch } from "../@types/branch.type";
+import log from '../utils/logger';
 
 const OWNER = getEnv().NEXT_PUBLIC_REPO_OWNER || '0riion';
 const REPO = getEnv().NEXT_PUBLIC_REPO_NAME || 'commit-flow-history';
@@ -19,6 +20,7 @@ export const getCommits: TGetCommits = async () => {
         owner: OWNER,
     });
 
+    log.debug('getCommits', commits);
     return commits;
 }
 
@@ -29,6 +31,7 @@ export const getCommit: TGetCommit = async () => {
         owner: OWNER,
     });
 
+    log.debug('getCommits', commits);
     return commits;
 }
 
@@ -44,6 +47,7 @@ export const getPaginatedCommits: TGetPaginatedCommits = async (
         pageSize: pageSize,
     });
 
+    log.debug('getPaginatedCommits', commits);
     return commits;
 };
 
@@ -54,6 +58,7 @@ export const getCommitTotalCount: TGetCommitTotalCount = async () => {
         owner: OWNER,
     });
 
+    log.debug('getCommitTotalCount', commits.length);
     return commits.length;
 };
 
@@ -74,6 +79,7 @@ export const getPaginatedCommitsOrderBy: TGetPaginatedCommitsOrderBy = async (
         branch,
     });
 
+    log.debug('getPaginatedCommitsOrderBy', commits);
     return commits;
 };
 
@@ -85,5 +91,6 @@ export const getAllBranchs: TGetAllBranchs = async () => {
         owner: OWNER,
     });
 
+    log.debug('getAllBranchs', branches);
     return branches;
 };

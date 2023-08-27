@@ -1,3 +1,4 @@
+import Notification from '../components/common/Notification';
 import LoadingComponent from '../components/common/loading-component';
 import Meta from '../components/common/meta';
 import Branch from '../components/home/branch';
@@ -14,6 +15,10 @@ export default function Home() {
 		commits,
 		orderBy,
 		pageSize,
+		isError,
+		errorMessage,
+		setIsError,
+		setErrorMessage,
 		nextPage,
 		prevPage,
 		changePageSize,
@@ -39,8 +44,16 @@ export default function Home() {
 						<Sorter changeOrderBy={changeOrderBy} orderBy={orderBy} />
 					</div>
 
-					{/* Table */}
+					{isError && (
+						<Notification
+							type="error"
+							message={errorMessage}
+							setIsError={setIsError}
+							setErrorMessage={setErrorMessage}
+						/>
+					)}
 
+					{/* Table */}
 					{loading && (
 						<LoadingComponent />
 					)}
@@ -58,7 +71,6 @@ export default function Home() {
 					)}
 
 					{/* Pagination & Page size */}
-
 					<div className='flex flex-wrap items-center justify-between mt-10'>
 						<PageSize changePageSize={changePageSize} pageSize={pageSize} />
 						<Pagination prevPage={prevPage} nextPage={nextPage} />

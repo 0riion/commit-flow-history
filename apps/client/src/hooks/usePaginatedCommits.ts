@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { TSort, useCommonPagination } from "./useCommonPagination";
 import { getCommitTotalCount, getPaginatedCommitsOrderBy } from "../services/commit";
 import { setCommits } from "../redux/features/commits";
+import log from '../utils/logger';
 
 type TUsePaginatedCommits = () => {
     commits: any[];
@@ -10,6 +11,10 @@ type TUsePaginatedCommits = () => {
     pageSize: number;
     orderBy: TSort;
     currentBranch: string;
+    isError: boolean;
+    errorMessage: string;
+    setIsError: (isError: boolean) => void;
+    setErrorMessage: (errorMessage: string) => void;
     nextPage: () => void;
     prevPage: () => void;
     changePageSize: (size: number) => void;
@@ -23,10 +28,14 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
     const dispatch = useAppDispatch();
 
     const {
+        isError,
+        errorMessage,
         orderBy,
         loading,
         pageIndex,
         pageSize,
+        setErrorMessage,
+        setIsError,
         startLoading,
         stopLoading,
         nextPage,
@@ -50,7 +59,7 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
             changeTotalPages(total);
             stopLoading();
         } catch (error) {
-            // TODO: add feedback and logging
+            log.error(error);
         }
     };
 
@@ -64,6 +73,10 @@ export const usePaginatedCommits: TUsePaginatedCommits = () => {
         pageSize,
         orderBy,
         currentBranch,
+        isError,
+        errorMessage,
+        setIsError,
+        setErrorMessage,
         nextPage,
         prevPage,
         changePageSize,

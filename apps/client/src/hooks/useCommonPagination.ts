@@ -7,6 +7,10 @@ type TUseCommonPagination = () => {
     pageIndex: number;
     totalPages: number;
     pageSize: number;
+    isError: boolean;
+    errorMessage: string;
+    setIsError: (isError: boolean) => void;
+    setErrorMessage: (errorMessage: string) => void;
     setTotalPages: (totalPages: number) => void;
     setPageIndex: (pageIndex: number) => void;
     setPageSize: (pageSize: number) => void;
@@ -26,6 +30,8 @@ export const useCommonPagination: TUseCommonPagination = () => {
     const [pageSize, setPageSize] = useState<number>(5);
     const [loading, setLoading] = useState<boolean>(false);
     const [orderBy, setOrderBy] = useState<TSort>("asc");
+    const [isError, setIsError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     const changeOrderBy = (orderBy: TSort) => {
         setOrderBy(orderBy);
@@ -66,6 +72,10 @@ export const useCommonPagination: TUseCommonPagination = () => {
         totalPages,
         pageSize,
         orderBy,
+        isError,
+        errorMessage,
+        setIsError,
+        setErrorMessage,
         setTotalPages,
         setPageIndex,
         setPageSize,

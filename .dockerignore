@@ -1,0 +1,12 @@
+*/node_modules
+*/dist
+*/build
+*.next
+*.swc
+coverage
+*.log
+*.tgz
+*.zip
+*.gz
+*.gzip
+*.tgz

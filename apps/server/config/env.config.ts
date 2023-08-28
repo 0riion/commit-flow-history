@@ -1,5 +1,5 @@
 export default () => ({
-  port: (process.env.PORT && parseInt(process.env.PORT)) || 3000,
+  port: (process.env.PORT && parseInt(process.env.PORT)) || 4000,
   github: {
     baseUrl: process.env.GITHUB_API || 'https://api.github.com',
     repoName: process.env.GITHUB_REPO_NAME || 'commit-flow-history',

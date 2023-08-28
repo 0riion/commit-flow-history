@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import environment from '../config/env.config';
 import { TrpcRouter } from './trpc/trpc.router';
 
-const PORT = environment().port || 3000;
+const PORT = environment().port || 4000;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

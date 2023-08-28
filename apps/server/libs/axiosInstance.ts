@@ -6,7 +6,6 @@ const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
         'X-GitHub-Api-Version': '2022-11-28',
-        'Authorization': environment().github.token,
     },
 });
 

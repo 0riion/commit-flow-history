@@ -32,7 +32,6 @@ Both the server and the client need the following environment variables:
 - `client`:
     - `NEXT_PUBLIC_ENVIRONMENT`: the environment where the application is running, it can be `development`, `staging`, or `production`.
     - `NEXT_PUBLIC_API_URL`: the URL of the server API.
-    - `NEXT_PUBLIC_GITHUB_AUTH_TOKEN`: the GitHub token to access the GitHub API.
     - `NEXT_PUBLIC_REPO_OWNER=0riion`: the owner of the repository.
     - `NEXT_PUBLIC_REPO_NAME`: the name of the repository.
 
@@ -41,6 +40,18 @@ You can define the necessary environment variables in each file, you can check t
 WARNING: the project has a github token, with limited permissions and time, to access the GitHub API, you can use it, but it is recommended to use your own token.
 
 ## How to use the application
+
+### Using pnpm
+
+This project uses pnpm as package manager, so you need to install it to run the application:
+
+- Nodejs installed, i recommend to use a version greater than 14.
+
+- Install pnpm: once you have nodejs installed, you can install pnpm with the following command:
+
+```bash
+npm i -g pnpm
+```
 
 - Clone the repository: clone the repository with the following command:
 
@@ -64,6 +75,22 @@ pnpm dev
 
 ```bash
 pnpm test
+```
+
+### Using docker
+
+This project has a docker-compose file, so you can run the application with docker-compose:
+
+- Clone the repository: clone the repository with the following command:
+
+```bash
+git clone <repository-url>
+```
+
+- Run the application: once you clone the repository, you can run the application with the following command:
+
+```bash
+docker-compose up
 ```
 
 ## Project Structure

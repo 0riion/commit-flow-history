@@ -27,17 +27,12 @@ Both the server and the client need the following environment variables:
 
 - `server`:
     - `PORT`: the port where the server will run.
-    - `GITHUB_TOKEN`: the GitHub token to access the GitHub API.
 
 - `client`:
     - `NEXT_PUBLIC_ENVIRONMENT`: the environment where the application is running, it can be `development`, `staging`, or `production`.
     - `NEXT_PUBLIC_API_URL`: the URL of the server API.
     - `NEXT_PUBLIC_REPO_OWNER=0riion`: the owner of the repository.
     - `NEXT_PUBLIC_REPO_NAME`: the name of the repository.
-
-You can define the necessary environment variables in each file, you can check the .env.example files to see the necessary environment variables.
-
-WARNING: the project has a github token, with limited permissions and time, to access the GitHub API, you can use it, but it is recommended to use your own token.
 
 ## How to use the application
 

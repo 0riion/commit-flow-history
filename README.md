@@ -7,6 +7,8 @@ This project lists all commits of a project. It provides the following functiona
 - Order the commits from a page for the newest and oldest commits.
 - Change branch and list all commits based on the branch.
 
+![Example images](./docs/media/commit-flow.png)
+
 ## Technologies
 
 The technologies used in this project are:
